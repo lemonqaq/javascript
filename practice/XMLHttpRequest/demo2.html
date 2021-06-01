@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 锚点链接   href="#id" -->
+    <header id="header">this is header<a href="#footer">去底部</a></header>
+    <main id="main" style="height: 1000px; background-color: #ffa;">
+        <!-- 在新的页面打开链接 target="_blank" 默认target="_self"表示在当前页面打开链接 -->
+        <a href="http://www.baidu.com" target="_blank">百度一下</a>
+        <!-- alt是找不到图片时显示的内容， title鼠标放在图片上显示的内容 -->
+        <img src="../image/tictac-numbers.png" alt="咦,图片丢失了" title="这是title">
+    </main>
+    <footer id="footer">this is footer<a href="#header">回到顶端</a></a></footer>
+    <script>
+        const main = document.getElementById('main');
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://localhost:8000/server');
+
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState == 4) {
+                if (xhr.status >= 200 && xhr.status < 300)
+                    console.log(xhr.getAllResponseHeaders());
+                console.log(xhr.responseText);
+                console.log(document.cookie);
+            }
+        }
+        xhr.send();
+
+    </script>
+
+</body>
+
+</html>

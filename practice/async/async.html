@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async</title>
+</head>
+
+<body>
+    <div id="div">
+        <form action="async.html" method="POST">
+            <input type="text" name="name" />
+            <input type="text" name="age" />
+
+            <input type="submit" />
+        </form>
+
+    </div>
+    <script>
+        function async(arg, callback) {
+            console.log('参数为' + arg + ',1秒后返回结构');
+            setTimeout(() => { callback(arg * 2); }, 1000);
+        }
+
+        function final(value) {
+            console.log('完成：', value);
+        }
+
+        var items = [1, 2, 3, 4, 5, 6];
+        //var items=[1];
+        var results = [];
+        console.log(items.shift());
+
+
+    </script>
+</body>
+
+</html>
