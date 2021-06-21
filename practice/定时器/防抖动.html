@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">防抖动(debounce)</button>
+    <script>
+        function debounce(fn, delay) {
+            let timer;
+            return function () {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn.apply(document);
+                }, delay);
+            }
+        }
+
+        function sayHello() {
+            console.log(this);
+            console.log('你好');
+        }
+
+        const btn = document.querySelector('button');
+        btn.addEventListener('click', debounce(sayHello, 2000));
+    </script>
+</body>
+
+</html>

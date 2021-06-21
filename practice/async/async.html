@@ -21,18 +21,40 @@
     <script>
         function async(arg, callback) {
             console.log('参数为' + arg + ',1秒后返回结构');
-            setTimeout(() => { callback(arg * 2); }, 1000);
+            setTimeout(() => { callback(arg * 2); }, 2000);
         }
 
         function final(value) {
             console.log('完成：', value);
+            console.log(results);
         }
 
-        var items = [1, 2, 3, 4, 5, 6];
-        //var items=[1];
-        var results = [];
-        console.log(items.shift());
+        //const items = [1, 2, 3, 4, 5, 6];
+        const items = [1, 2];
+        const results = [];
+        let running = 0;
+        let limit = 2;
 
+        function launcher() {
+            // 0 < 2               6 > 0
+            while (running < limit && items.length > 0) {
+                // item = 1
+                let item = items.shift();
+                async(item, function (result) {
+                    results.push(result);
+                    running--;
+                    if (items.length > 0) {
+                        launcher();
+                    } else if (running == 0) {
+                        final(results);
+                    }
+                });
+                running++;
+            }
+            console.log('while执行完了');
+        }
+
+        launcher();
 
     </script>
 </body>

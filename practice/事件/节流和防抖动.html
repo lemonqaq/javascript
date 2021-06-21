@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            width: 300px;
+            background-color: #faa;
+        }
+    </style>
+</head>
+
+<body onload="bodyLoad()">
+    <!-- on-属性的监听代码，只在冒泡阶段触发。 -->
+    <div onclick="console.log(2)">
+        <button onclick="btnClick()">点击</button>
+    </div>
+    <script>
+        function bodyLoad() {
+            console.log(this);
+            console.log('body加载了');
+        }
+        function btnClick() {
+            console.log(this);
+            console.log('按钮点击了');
+        }
+
+        let div = document.querySelector('div');
+        div.addEventListener('mousedown', function () {
+            console.log('按下鼠标了');
+        }, false);
+        div.addEventListener('mouseup', function () {
+            console.log('松开鼠标键了');
+        }, false);
+        div.addEventListener('dblclick', function () {
+            console.log('双击鼠标键了');
+        }, false);
+        div.addEventListener('mousemove', throttle3(say, 2000), false);
+        //防抖动 时间戳的方式实现 立即执行
+        function debounce1(fn, delay) {
+            let startTime = 0;
+            return function () {
+                nowTime = Date.now();
+                if (nowTime - startTime > delay) {
+                    fn.apply(document);
+                }
+                startTime = Date.now();
+            }
+        }
+
+        //防抖动 定时函数的方式实现 立即执行
+        function debounce3(fn, delay) {
+            let timer = null;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                let doNow = !timer;
+                timer = setTimeout(function () {
+                    timer = null;
+                }, delay);
+
+                if (doNow) {
+                    fn.apply(document);
+                }
+            }
+
+        }
+
+        //防抖动 延迟执行
+        function debounce2(fn, delay) {
+            let timer;
+            return function () {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn.apply(document);
+                }, delay);
+            }
+        }
+        function say() {
+            console.log('间隔超过一秒才会触发鼠标移动事件');
+        }
+
+        //节流，一定时间内肯定会执行一次
+        //时间戳的方式实现  立即执行
+        function throttle1(fn, delay) {
+            let startTime = 0;
+            return () => {
+                let nowTime = Date.now();
+                if (nowTime - startTime > delay) {
+                    fn.call(document);
+                    startTime = Date.now();
+                    /* startTime放在括号里面 表示一定时间内肯定会执行一次；
+                    放在括号外面，表示只有一定时间间隔内不触发监听函数才会执行 */
+                }
+            }
+        }
+
+        //节流 定时函数的方式实现  立即执行
+        function throttle3(fn, delay) {
+            let timer = null;
+            return () => {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        timer = null;
+                    }, delay);
+                    fn.call(document);
+                }
+
+            }
+        }
+        //节流 定时函数的方式实现  延时执行
+        function throttle2(fn, delay) {
+            let timer = null;
+            return () => {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.call(document);
+                        timer = null;
+                    }, delay);
+                }
+            }
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">节流(throttle)</button>
+    节流：一定时间内只触发一次函数。它和防抖动最大的区别就是：节流函数不管事件触发有多频繁，
+    都会保证在规定的时间内一定会执行一次事件处理函数，而防抖动只是在最后一次事件后触发一次函数
+    <script>
+        //用时间戳的方式实现节流
+        function throttle(fn, delay) {
+            let startTime = 0
+            //闭包
+            return function () {
+                let nowTime = Date.now();
+                if (nowTime - startTime > delay) {
+                    //绑定this
+                    fn.call(document);
+                    startTime = Date.now();
+                }
+
+            }
+        }
+
+        function sayHello() {
+            console.log(this);
+            console.log('你好');
+        }
+
+        const btn = document.querySelector('button');
+        btn.addEventListener('click', throttle(sayHello, 1000));
+
+
+    </script>
+</body>
+
+</html>

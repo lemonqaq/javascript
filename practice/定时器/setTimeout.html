@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout</title>
+    <style>
+        * {
+            background-color: rgb(238, 236, 236);
+            font-size: 13px;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #d6f5b9;
+        }
+
+        .div.div1 {
+            width: 300px;
+            height: 300px;
+            background-color: #ddd;
+        }
+
+        .div .div1 {
+            width: 100px;
+            height: 100px;
+            background-color: #aaf;
+        }
+
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: #def;
+        }
+
+        /* input {
+            background-color: #eaa;
+        } */
+    </style>
+</head>
+
+<body>
+    <div>
+        姓名<input class="inputName" type="text" name="name" value="默认值" /><br>
+        年龄<input class="inputage" type="text" name="age" value="18" />
+    </div>
+
+    <div class="div div1">div
+        <div class="div1" id="div1">div1</div>
+    </div>
+    ----------------
+    <div class="div">div2</div>
+    <script>
+        /* setTimeout函数用来指定某个函数或某段代码，在多少毫秒后执行。
+        它返回一个整数，表示定时器的编号，以后可以用来取消这个定时器
+        setTimeout的第二个参数如果省略，则默认为0。
+        除了前两个参数，setTimeOut还允许更多的参数。它们将依次传入推迟执行的的函数（回调函数）。
+
+        还有一个需要注意的地方，如果回调函数是对象的方法，
+        那么setTimeout使得方法内部的this关键字指向全局环境，而不是定义时所在的那个对象
+        */
+
+        /* (function () {
+            // 每轮事件循环检查一次
+            var gid = setInterval(clearAllTimeouts, 0);
+
+            function clearAllTimeouts() {
+                console.log('要执行多少次');
+                var id = setTimeout(function () { }, 0);
+                //console.log(id);
+                while (id > 0) {
+                    if (id !== gid) {
+                        clearTimeout(id);
+                    }
+                    id--;
+                }
+            }
+        })(); */
+
+    </script>
+
+</body>
+
+</html>

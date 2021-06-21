@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1 {
+            width: 400px;
+            height: 400px;
+            background-color: #eee;
+            margin-top: 50px;
+            /* 解决嵌套块元素塌陷的三种方式 */
+            /* 为父元素定义上边框 */
+            /* border: 1px solid transparent; */
+            /* 为父元素定义内边距 */
+            /* padding: 1px; */
+            /* 为父元素添加overflow: hidden; */
+            overflow: hidden;
+        }
+
+        .div2 {
+            width: 200px;
+            height: 200px;
+            background-color: #aaa;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <div class="div2"></div>
+    </div>
+</body>
+
+</html>
